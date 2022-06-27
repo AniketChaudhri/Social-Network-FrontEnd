@@ -1,10 +1,10 @@
+import { BrowserRouter } from "react-router-dom";
+import MainRouter from "./MainRouter";
 
-function App() {
-  return (
-    <div className="App">
-      
-    </div>
-  );
-}
+const App = () => (
+  <BrowserRouter>
+    <MainRouter />
+  </BrowserRouter>
+)
 
 export default App;
