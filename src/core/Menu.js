@@ -28,20 +28,24 @@ const Menu = ({ history }) => (
             )}
             {isAuthenticated() && (
                 <>
-                <li className="nav-item" role="presentation">
-                    <a className="nav-link" style={(isActive(history, "/signin"), { cursor: "pointer", color: "#fff" })} onClick={() => signout(() => history.push('/'))}>Sign Out</a>
-                </li>
-                <li className="nav-item" role="presentation">
-                    <a className="nav-link">{isAuthenticated().user.name}</a>
-                </li>
+                    <li className="nav-item" role="presentation">
+                        {/* eslint-disable-next-line */}
+                        <a className="nav-link" style={(isActive(history, "/signin"), { cursor: "pointer", color: "#fff" })} onClick={() => signout(() => history.push('/'))}>Sign Out</a>
+                    </li>
+
+                    <li className="nav-item" role="presentation">
+                        <Link to={`/user/${isAuthenticated().user._id}`} className="nav-link">
+                            {`${isAuthenticated().user.name}'s Profile`}
+                        </Link>
+                    </li>
                 </>
-                
+
             )}
-            
+
         </ul>
 
         {/* {()=>console.log(JSON.stringify(props))} */}
-    </div>
+    </div >
 )
 
 export default withRouter(Menu);

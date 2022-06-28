@@ -52,15 +52,15 @@ const SignUp = () => {
         <form>
             <div className='form-group'>
                 <label className='text-muted'>Name</label>
-                <input onChange = {handleOnChange} type="text" classname="form-control" name = "name" value={name}/>
+                <input onChange = {handleOnChange} type="text" className="form-control" name = "name" value={name}/>
             </div>
             <div className='form-group'>
                 <label className='text-muted'>Email</label>
-                <input onChange={handleOnChange} type="email" classname="form-control" name = "email" value={email}/>
+                <input onChange={handleOnChange} type="email" className="form-control" name = "email" value={email}/>
             </div>
             <div className='form-group'>
                 <label className='text-muted'>Password</label>
-                <input onChange={handleOnChange} type="password" classname="form-control" name = "password" value={password}/>
+                <input onChange={handleOnChange} type="password" className="form-control" name = "password" value={password}/>
             </div>
             <button onClick={handleSubmit} className='btn btn-raised btn-primary'>Sign Up</button>
             
