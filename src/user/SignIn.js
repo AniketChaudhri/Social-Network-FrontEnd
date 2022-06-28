@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import { signIn, authenticate } from '../auth/index';
 
 const SignIn = () => {
 
@@ -9,20 +10,7 @@ const SignIn = () => {
     const [success, setSuccess] = useState('');
     const [redirectToRefer, setRedirectToRefer] = useState(false);
     const [loading, setLoading] = useState(false);
-
-    const signIn = (user) => (
-        fetch('http://localhost:8080/signin', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(user)
-
-        })
-            .then(res => res.json())
-            .catch(error => console.error('Error:', error))
-    )
+ 
 
     const handleOnChange = (e) => {
         setError('');
@@ -32,13 +20,6 @@ const SignIn = () => {
             setEmail(value);
         } else if (name === 'password') {
             setPassword(value);
-        }
-    }
-
-    const authenticate = (jwt, next) => {
-        if (typeof window !== 'undefined') {
-            localStorage.setItem('jwt', JSON.stringify(jwt));
-            next();
         }
     }
 
