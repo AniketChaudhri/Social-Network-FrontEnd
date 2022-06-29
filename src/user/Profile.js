@@ -1,38 +1,35 @@
 import { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { isAuthenticated } from '../auth/index';
+import { read } from './apiUser';
 
 
 const Profile = (props) => {
     const [user, setUser] = useState('')
     const [redirectToSignIn, setRedirectToSignIn] = useState(false)
 
+    
+    const init = (userId) => {
+        read(userId, isAuthenticated().token)
+            .then(data => {
+                if (data.error) {
+                    setRedirectToSignIn(true)
+                }
+                else {
+                    setUser(data)
+                }
+            })
+
+    }
+
 
     useEffect(() => {
         const userId = props.match.params.userId
-        fetch(`${process.env.REACT_APP_API_URL}/user/${userId}`, {
-            method: 'GET',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${isAuthenticated().token}`
-                
-            }
-        })
-        .then(res => res.json())
+        init(userId)
+    }, // eslint-disable-next-line
+    [])
 
-        .then(data => {
-            if (data.error){
-                setRedirectToSignIn(true)
-            }
-            else{
-                setUser(data)
-            }
-        })
-        
-    })
-
-    if (redirectToSignIn){
+    if (redirectToSignIn) {
         return <Redirect to="/signin" />
     }
     return (
